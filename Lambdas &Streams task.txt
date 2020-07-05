@@ -1,0 +1,144 @@
+1.Average of Integers
+
+package com.epam.lambdas_streams;
+import java.util.Scanner;
+public class ArrayAverageProblem {
+    public static void main(String[] args) 
+    {
+        System.out .println("Java Program to find the average of a list of integers"); 
+        System.out.println("Please enter length of the array:");
+        Scanner scnr = new Scanner(System.in);
+        int length = scnr.nextInt();
+        int[] input = new int[length];
+        System.out.println("Please enter numbers ");
+        for (int i = 0; i < length; i++) 
+        { 
+            input[i] = scnr.nextInt(); 
+            
+        } 
+        float average = average(input); 
+        System.out.print("Average of "); 
+        for (int i = 0; i < length; i++) 
+        { 
+        	 System.out.print(+input[i]);
+        	 if (i<length-1)
+        	 System.out.print(",");
+        } 
+        System.out.println(" is: "+average);
+        scnr.close(); 
+        
+    } 
+    public static float average(int[] input)
+    { 
+        float sum = 0f;
+        for (int number : input) 
+        { 
+            sum = sum + number;
+        } 
+    return sum / input.length;
+    } 
+    
+}
+
+
+output:
+Java Program to find the average of a list of integers
+Please enter length of the array:
+5
+Please enter numbers 
+2
+4
+6
+8
+10
+Average of 2,4,6,8,10 is: 6.0
+
+
+
+
+2.List of Strings Starting with a
+
+package com.epam.lambdas_streams;
+import java.util.*;
+import java.util.stream.Collectors;
+public class ListOfStringsStartWithA{
+        static void   search(List<String> l){
+           
+          List<String> result=l.stream() 
+                        .filter(s->s.startsWith("a"))
+                       .filter(s->s.length()==3)
+                        .collect(Collectors.toList());
+         System.out.print("List of Strings having exactly 3 letters and starting with a: "+result);
+       }
+    
+     public static void main(String []args){
+    	 List<String> strlist=new ArrayList<String>();
+ 		strlist.add("any");
+ 		strlist.add("hello");
+ 		strlist.add("ball");
+ 		strlist.add("ant");
+ 		strlist.add("an");
+ 		strlist.add("pencil");
+ 		System.out.println("Original list: "+strlist);
+        search(strlist);
+     }
+}
+
+
+output:
+Original list: [any, hello, ball, ant, an, pencil]
+List of Strings having exactly 3 letters and starting with a: [any, ant]
+
+
+
+
+
+
+
+3.PalindromeCheck
+
+package com.epam.lambdas_streams;
+import java.util.*;
+import java.util.stream.IntStream;
+interface Hello{
+	void is(List<String> l);
+}
+public class PalindromeCheck{
+	public static void isPalin(List<String> l) {
+		boolean isPalindrome;
+		List<String> finallist=new ArrayList<String>();
+		for(int k=0;k<l.size();k++) {
+			String g=l.get(k);
+			isPalindrome=IntStream
+					.range(0,g.length()/2)
+					.noneMatch(i->g.charAt(i)!=g
+					.charAt(g.length()-i-1));
+			if(isPalindrome) {
+				finallist.add(g);
+			}
+		}
+		System.out.println("Palindromes from the given list are:"+finallist);
+		
+	}
+	public static void main(String []args) {
+		List<String> strlist=new ArrayList<String>();
+		strlist.add("mom");
+		strlist.add("dad");
+		strlist.add("book");
+		strlist.add("pen");
+		strlist.add("level");
+		strlist.add("noon");
+		strlist.add("chair");
+		System.out.println("Original list:"+strlist);
+		Hello h=PalindromeCheck::isPalin;
+		h.is(strlist);
+		
+		
+	}
+}
+
+
+Output:
+Original list:[mom, dad, book, pen, level, noon, chair]
+Palindromes from the given list are:[mom, dad, level, noon]
+
